@@ -2,41 +2,39 @@ import json
 import os
 from fileHandler import theFile as UserFiles
 
-class Teacher:
+class Department:
     name=""
-    did=-1
-    tid=-1
+    id=-1
 
-    def __init__(self, tid, name, did):
-        self.tid=tid
+    def __init__(self, id, name):
+        self.id=id
         self.name=name
-        self.did=did
 
-    def addTeacher(self):
+    def addDepartment(self):
         data = {}
         f = UserFiles()
 
-        # ADD NEW TEACHER TO JSON
+        # ADD NEW DEPARTMENT TO JSON
         try:
             handler = UserFiles()
-            file = handler.t_file
+            file = handler.d_file
 
-            with open(file, 'r') as teacherFile:
-                data = json.load(teacherFile)
-                newTeacher = {str(f.getTeachCount): {'name': self.name, 'id':self.tid, 'did':self.did}}
-                data.update(newTeacher)
+            with open(file, 'r+') as departmentFile:
+                data = json.load(departmentFile)
+                newDept = {str(self.id): {'name': self.name, 'id':self.id}}
+                data.update(newDept)
 
-            with open(file, 'w') as teacherFile:
-                json.dump(data, teacherFile, indent=4)
+            with open(file, 'w+') as departmentFile:
+                json.dump(data, departmentFile, indent=4)
 
-            # UPDATE TEACHER COUNT FROM META DATA
-            f.metaAddTeach()
+            # UPDATE DEPARTMENT COUNT FROM META DATA
+            f.metaAddDept()
 
             return True
         except Exception as e:
             return e
         
 
-    def getTeacherID(self):
+    def getDepartmentID(self):
         return self.tid
         

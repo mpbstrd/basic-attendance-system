@@ -21,12 +21,12 @@ class Teacher:
             handler = UserFiles()
             file = handler.t_file
 
-            with open(file, 'r') as teacherFile:
+            with open(file, 'r+') as teacherFile:
                 data = json.load(teacherFile)
-                newTeacher = {str(f.getTeachCount): {'name': self.name, 'id':self.tid, 'did':self.did}}
+                newTeacher = {str(self.tid): {'name': self.name, 'id':self.tid, 'did':self.did}}
                 data.update(newTeacher)
 
-            with open(file, 'w') as teacherFile:
+            with open(file, 'w+') as teacherFile:
                 json.dump(data, teacherFile, indent=4)
 
             # UPDATE TEACHER COUNT FROM META DATA
