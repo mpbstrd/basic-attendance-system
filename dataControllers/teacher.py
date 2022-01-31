@@ -1,7 +1,9 @@
 import json
 import os
+from dataControllers.fileEncryptionDecryption import fileEncrypt
 from fileHandler import theFile as UserFiles
-
+from fileEncryptionDecryption import fileEncrypt
+from fileEncryptionDecryption import fileDecrypt
 class Teacher:
     name=""
     did=-1
@@ -13,6 +15,7 @@ class Teacher:
             self.tid=args[0]
             self.name=args[1]
             self.did=args[2]
+            self.encrypted=False
 
     def setTeacher(self, tid, name, did):
         self.tid=tid
@@ -29,11 +32,21 @@ class Teacher:
             file = handler.t_file
 
             with open(file, 'r+') as teacherFile:
+
+                if self.encrypted == True:
+                    fileDecrypt(teacherFile)
+                    self.encrypted = False
+
                 data = json.load(teacherFile)
                 newTeacher = {str(self.tid): {'name': self.name, 'id':self.tid, 'did':self.did}}
                 data.update(newTeacher)
 
             with open(file, 'w+') as teacherFile:
+                
+                if self.encrypted != True:
+                    fileDecrypt(teacherFile)
+                    self.encrypted = True
+
                 json.dump(data, teacherFile, indent=4)
 
             # UPDATE TEACHER COUNT FROM META DATA

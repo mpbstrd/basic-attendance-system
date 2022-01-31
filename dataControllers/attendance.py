@@ -5,6 +5,8 @@ from fileHandler import theFile as UserFiles
 from datetime import date
 from datetime import time
 from datetime import datetime
+from fileEncryptionDecryption import fileDecrypt as decrypt
+from fileEncryptionDecryption import fileEncrypt as encrypt
 
 class Attendace:
     def __init__(self):
@@ -24,6 +26,11 @@ class Attendace:
         self.time_in = now.strftime('%I:%M:%S %p')
 
         with open(file, 'r+') as attFile:
+
+            if self.encrypted == True:
+                decrypt(attFile)
+                self.encrypted = False
+
             data = json.load(attFile)
 
             # ti = {'id': self.id, "time_in": self.time_in , "time_out": data[today]["time_out"]}
@@ -34,6 +41,11 @@ class Attendace:
             data.update(newAtt)
 
             with open(file, 'w+') as attFile:
+
+                if self.encrypted != True:
+                    decrypt(attFile)
+                    self.encrypted = True
+
                 json.dump(data, attFile, indent=4)
 
         return data
