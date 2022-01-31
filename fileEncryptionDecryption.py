@@ -8,9 +8,9 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.fernet import Fernet
 
 def createKey():
-    #string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-    #password_provided = ''.join(choice(string) for i in range(12)) #This is input in form of string
-    password_provided = "DxzMSvmkdg12"
+    string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    password_provided = ''.join(choice(string) for i in range(12))
+    #password_provided = "DxzMSvmkdg12"
     password = password_provided.encode() #Convert to type bytes
 
     salt = b'\xa9!\xf0\xcc\x94&[\xc4\xf4\xac\x0f)=\x160\xf5'
@@ -41,7 +41,6 @@ def fileEncrypt(input_file):
         if os.path.exists(input_file):
             os.remove(input_file)
     with open(key, 'wb') as f:
-        print(keygen)
         f.write(keygen)
         
     # Note: You can delete input_file here if you want
