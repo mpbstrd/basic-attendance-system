@@ -44,7 +44,8 @@ def fileEncrypt(input_file):
         
     # Note: You can delete input_file here if you want
 
-def fileDecrypt(input_file,filekey):
+def fileDecrypt(input_file):
+    filekey = os.path.splitext(input_file)[0] + ".key"
     output_file = os.path.splitext(input_file)[0] + ".json"
 
     with open(filekey, 'rb') as rawkey:
