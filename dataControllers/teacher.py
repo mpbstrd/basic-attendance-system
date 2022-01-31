@@ -7,7 +7,14 @@ class Teacher:
     did=-1
     tid=-1
 
-    def __init__(self, tid, name, did):
+    # def __init__(self, tid, name, did):
+    def __init__(self, *args):
+        if len(args)>0:
+            self.tid=args[0]
+            self.name=args[1]
+            self.did=args[2]
+
+    def setTeacher(self, tid, name, did):
         self.tid=tid
         self.name=name
         self.did=did
@@ -40,3 +47,17 @@ class Teacher:
     def getTeacherID(self):
         return self.tid
         
+    def idExists(self, id):
+        try:
+            handler = UserFiles()
+            file = handler.t_file
+
+            with open(file, 'r+') as teacherFile:
+                data = json.load(teacherFile)
+
+                if type(data[id]) == type({}):
+                    return True
+                else:
+                    return False
+        except Exception as e:
+            return e

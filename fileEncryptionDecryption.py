@@ -10,7 +10,6 @@ from cryptography.fernet import Fernet
 def createKey():
     string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     password_provided = ''.join(choice(string) for i in range(12))
-    #password_provided = "DxzMSvmkdg12"
     password = password_provided.encode() #Convert to type bytes
 
     salt = b'\xa9!\xf0\xcc\x94&[\xc4\xf4\xac\x0f)=\x160\xf5'
@@ -66,7 +65,3 @@ def fileDecrypt(input_file,filekey):
         # Note: You can delete input_file here if you want
     except (cryptography.fernet.InvalidToken, TypeError):
         print("Decryption Failed: Invalid key")
-
-# FOR TESTING 
-#fileDecrypt("C:\Attendance\data\TeacherList.enc","C:\Attendance\data\TeacherList.key")
-#fileEncrypt("C:\Attendance\data\TeacherList.json")
