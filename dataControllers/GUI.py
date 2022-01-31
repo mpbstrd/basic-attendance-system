@@ -44,20 +44,21 @@ def timein():
     e1.config(font=1)
     e1.place(x=160,y=230)
 
+    
+
     # BACK END THINGS
-    inn = e1.get()
-    t = Teacher()
-    temp = t.idExists(inn)
 
     def cmd():
-        messagebox.showinfo("inn")
+        inn = e1.get()
+        t = Teacher()
+        temp = t.idExists(inn)
 
         if temp == True:
             a = Attendace()
-            if a.timein(inn) == True:
-                messagebox.showinfo("LOGIN SUCCUESSFULLY!", today)
+            if type(a.timein(inn)) == type({}):
+                messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Time in at: "+today)
             else:
-                messagebox.showinfo("LOGIN FAILED!!", str(e1.get())+" Unable to time in. Please try again")
+                messagebox.showinfo("LOGIN FAILED!!", "Unable to time in. Please try again")
         else:
             messagebox.showinfo("LOGIN FAILED!!", "Unable to identify user. Please try again")
 
@@ -74,22 +75,23 @@ def timeout():
     e1 = Entry(gui,width=20,border=2)
     e1.config(font=1)
     e1.place(x=160,y=230)
-    
-    # BACK END THINGS
-    inn = e1.get()
-    t = Teacher()
-    temp = t.idExists(str(inn))
 
-    def cmd():
+
+    def cmd():            
+        # BACK END THINGS
+        inn = e1.get()
+        t = Teacher()
+        temp = t.idExists(inn)
+
         if temp == True:
             a = Attendace()
-            if a.timeout(inn) == True:
-                messagebox.showinfo("LOGIN SUCCUESSFULLY!", today)
+            if type(a.timeout(inn)) == type({}):
+                messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Timeout at: "+today)
                 gui.mainloop()
             else:
-                messagebox.showinfo("LOGIN FAILED!!", "PLEASE TRY AGAIN")
+                messagebox.showinfo("LOGIN FAILED!!", "Unable to time in. Please try again")
         else:
-            messagebox.showinfo("LOGIN FAILED!!", "PLEASE TRY AGAIN")
+            messagebox.showinfo("LOGIN FAILED!!", "Unable to identify user. Please try again")
 
 
     Button(gui,width=20,height=2,fg="white",bg="orange",activebackground="#FFD580",border=0,command=cmd,text='SUBMIT').place(x=180,y=280)
