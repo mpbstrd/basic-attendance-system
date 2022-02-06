@@ -80,9 +80,8 @@ def timeout():
         # BACK END THINGS
         inn = e1.get()
         t = Teacher()
-        temp = idExists(inn)
-
-        if temp == True:
+        
+        if idExists(inn):
             a = Attendance()
             if type(a.timeout(inn)) == type({}):
                 messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Timeout at: "+today)
