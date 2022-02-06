@@ -11,7 +11,7 @@ class theFile:
     j = os.path.join("C:\\", p, "Data")
 
     # Files
-    meta = os.path.join("C:\\", p, "meta.json");
+    meta = os.path.join("C:\\", p, "meta.json")
     t_file = os.path.join(j, "TeacherList.json")
     d_file = os.path.join(j, "DepartmentList.json")
     a_file = os.path.join(j, "AttendanceList.json")

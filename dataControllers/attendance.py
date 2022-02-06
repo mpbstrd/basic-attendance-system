@@ -20,14 +20,14 @@ class Attendance:
 
         # ADD NEW TEACHER TO JSON
         handler = UserFiles()
+        efile = handler.aenc_file
         file = handler.a_file
+
         
         today = now.strftime("%Y/%m/%d")
         self.time_in = now.strftime('%I:%M:%S %p')
 
-        if self.encrypted == True:
-                decrypt(file)
-                self.encrypted = False
+        decrypt(efile)
 
 
         with open(file, 'r+') as attFile:
@@ -43,10 +43,8 @@ class Attendance:
             with open(file, 'w+') as attFile:
                 json.dump(data, attFile, indent=4)
 
-            if self.encrypted != True:
-                decrypt(handler.aenc_file)
-                self.encrypted = True
 
+        encrypt(file)
         return data
         
         
@@ -58,10 +56,13 @@ class Attendance:
 
         # ADD NEW TEACHER TO JSON
         handler = UserFiles()
+        efile = handler.aenc_file
         file = handler.a_file
         
         today = now.strftime("%Y/%m/%d")
         self.time_out = now.strftime('%I:%M:%S %p')
+
+        decrypt(efile)
 
         with open(file, 'r+') as attFile:
             data = json.load(attFile)
@@ -76,4 +77,5 @@ class Attendance:
             with open(file, 'w+') as attFile:
                 json.dump(data, attFile, indent=4)
 
+        encrypt(file)
         return data

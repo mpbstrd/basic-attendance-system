@@ -6,11 +6,11 @@ import time
 import sys
 from webbrowser import get
 
-from numpy import inner
 
 from teacher import Teacher
 from department import Department
 from attendance import Attendance
+from teacher import idExists
 
 # BASIC COMPONENTS
 gui = Tk()
@@ -51,9 +51,8 @@ def timein():
     def cmd():
         inn = e1.get()
         t = Teacher()
-        temp = t.idExists(inn)
     
-        if temp == True:
+        if idExists(inn):
             a = Attendance()
             if type(a.timein(inn)) == type({}):
                 messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Time in at: "+today)
@@ -81,7 +80,7 @@ def timeout():
         # BACK END THINGS
         inn = e1.get()
         t = Teacher()
-        temp = t.idExists(inn)
+        temp = idExists(inn)
 
         if temp == True:
             a = Attendance()

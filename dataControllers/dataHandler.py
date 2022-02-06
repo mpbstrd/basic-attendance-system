@@ -5,6 +5,7 @@ from department import Department
 from attendance import Attendance
 from fileEncryptionDecryption import fileEncrypt
 from fileEncryptionDecryption import fileDecrypt
+from teacher import idExists
 
 
 
@@ -13,12 +14,11 @@ f = theFile()
 
 inputID = input("ID:" )
 t = Teacher()
-temp = t.idExists(str(inputID))
+# temp = idExists(inputID)
 
 a = Attendance()
 # print(temp)
+fileEncrypt(f.t_file)
+#print(a.timein(inputID))
+#print(a.timeout(inputID))
 
-# print(a.timein(inputID))
-# print(a.timeout(inputID))
-
-# fileEncrypt(f.t_file)

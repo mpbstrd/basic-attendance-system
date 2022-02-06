@@ -56,24 +56,23 @@ class Teacher:
     def getTeacherID(self):
         return self.tid
         
-    def idExists(self, id):
-        try:
-            handler = UserFiles()
-            file = handler.t_file
+def idExists(id):
+    try:
+        handler = UserFiles()
+        file = handler.t_file
+        efile = handler.tenc_file
 
-            fileDecrypt(handler.tenc_file)
-            self.encrypted = False
+        fileDecrypt(efile)
+        
+        with open(file, 'r+') as teacherFile:
+            data = json.load(teacherFile)
             
-            with open(file, 'r+') as teacherFile:
-                data = json.load(teacherFile)
+            fileEncrypt(efile)
 
-                if type(data[id]) == type({}):
-                    fileEncrypt(file)
-                    self.encrypted = True
-                    return True
-                else:
-                    return False
-            
+            if type(data[id]) == type({}):
+                return True
+            else:
+                return False
 
-        except Exception as e:
-            return e
+    except Exception as e:
+        return e
