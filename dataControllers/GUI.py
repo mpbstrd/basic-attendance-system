@@ -10,7 +10,7 @@ from numpy import inner
 
 from teacher import Teacher
 from department import Department
-from attendance import Attendace
+from attendance import Attendance
 
 # BASIC COMPONENTS
 gui = Tk()
@@ -52,9 +52,9 @@ def timein():
         inn = e1.get()
         t = Teacher()
         temp = t.idExists(inn)
-
+    
         if temp == True:
-            a = Attendace()
+            a = Attendance()
             if type(a.timein(inn)) == type({}):
                 messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Time in at: "+today)
             else:
@@ -84,7 +84,7 @@ def timeout():
         temp = t.idExists(inn)
 
         if temp == True:
-            a = Attendace()
+            a = Attendance()
             if type(a.timeout(inn)) == type({}):
                 messagebox.showinfo("LOGIN SUCCUESSFULLY!", "Timeout at: "+today)
                 gui.mainloop()

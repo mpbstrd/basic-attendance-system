@@ -15,6 +15,9 @@ class theFile:
     t_file = os.path.join(j, "TeacherList.json")
     d_file = os.path.join(j, "DepartmentList.json")
     a_file = os.path.join(j, "AttendanceList.json")
+    tenc_file = os.path.join(j, "TeacherList.enc")
+    denc_file = os.path.join(j, "DepartmentList.enc")
+    aenc_file = os.path.join(j, "AttendanceList.enc")
 
     # Initializes all folders
     def createDirs(self):

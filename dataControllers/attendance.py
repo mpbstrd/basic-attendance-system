@@ -8,9 +8,9 @@ from datetime import datetime
 from fileEncryptionDecryption import fileDecrypt as decrypt
 from fileEncryptionDecryption import fileEncrypt as encrypt
 
-class Attendace:
+class Attendance:
     def __init__(self):
-        print("asdasd")
+        self.encrypted = True
 
     def timein(self, id):
         self.id = id
@@ -25,12 +25,12 @@ class Attendace:
         today = now.strftime("%Y/%m/%d")
         self.time_in = now.strftime('%I:%M:%S %p')
 
-        with open(file, 'r+') as attFile:
-
-            if self.encrypted == True:
-                decrypt(attFile)
+        if self.encrypted == True:
+                decrypt(file)
                 self.encrypted = False
 
+
+        with open(file, 'r+') as attFile:
             data = json.load(attFile)
 
             # ti = {'id': self.id, "time_in": self.time_in , "time_out": data[today]["time_out"]}
@@ -41,12 +41,11 @@ class Attendace:
             data.update(newAtt)
 
             with open(file, 'w+') as attFile:
-
-                if self.encrypted != True:
-                    decrypt(attFile)
-                    self.encrypted = True
-
                 json.dump(data, attFile, indent=4)
+
+            if self.encrypted != True:
+                decrypt(handler.aenc_file)
+                self.encrypted = True
 
         return data
         

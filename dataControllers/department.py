@@ -22,25 +22,23 @@ class Department:
         # ADD NEW DEPARTMENT TO JSON
         try:
             handler = UserFiles()
-            file = handler.d_file
+            file = handler.denc_file
+
+            if self.encrypted == True:
+                fileDecrypt(file)
+                self.encrypted = False
 
             with open(file, 'r+') as departmentFile:
-                
-                if self.encrypted == True:
-                    fileDecrypt(departmentFile)
-                    self.encrypted = False
-
                 data = json.load(departmentFile)
                 newDept = {str(self.id): {'name': self.name, 'id':self.id}}
                 data.update(newDept)
 
             with open(file, 'w+') as departmentFile:
-                
-                if self.encrypted != True:
-                    fileDecrypt(departmentFile)
-                    self.encrypted = True
-
                 json.dump(data, departmentFile, indent=4)
+  
+            if self.encrypted != True:
+                fileEncrypt(handler.d_file)
+                self.encrypted = True
 
             # UPDATE DEPARTMENT COUNT FROM META DATA
             f.metaAddDept()
